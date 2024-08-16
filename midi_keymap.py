@@ -93,6 +93,5 @@ if __name__ == "__main__":
             case "3":
                 print("Cerrando Programa")
                 break
-1
 
         
