@@ -13,16 +13,20 @@ class MIDIbind:
                 print(f"Tecla presionada: {note}")
                 if note in MIDIkeys.controlls.keys():
                     MIDIkeys.controlls[note].start_command()
+                    return True
                 else:
                     print("Sin asignar")
+                    return False
             
             # Pads
             case 153:
                 print(f"Pad: {note}")
                 if note in MIDIPads.controlls.keys():
                     MIDIPads.controlls[note].start_command()
+                    return True
                 else:
                     print("Sin asignar")
+                    return False
 
             # Sliders
             case 176:
@@ -30,8 +34,10 @@ class MIDIbind:
                 print(f"Control Change detectado - cc: {control}")
                 if control in MIDIcc.controlls.keys():
                     MIDIcc.controlls[control].start_command()
+                    return True
                 else:
                     print("Sin asignar")
+                    return False
                     
     def bind(self):
         status, note = self.get_key()
