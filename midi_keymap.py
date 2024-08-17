@@ -57,25 +57,15 @@ def get_all_midis():
 
     print()
 
-bind_1 = MIDIkeys(72,8)
-bind_2 = MIDIkeys(71,8)
-bind_3 = MIDIPads(36,8)
-bind_4 = MIDIPads(37,8)
-bind_5 = MIDIPads(38,8)
-
-bind_1.set_command("f11")
-bind_2.set_command("esc")
-bind_3.set_command("ctrl,a")
-bind_4.set_command("ctrl,c")
-bind_5.set_command("ctrl,v")
-
 
 if __name__ == "__main__":
     check = True
     clean_window()
-    print("Bienvenido a MIDIKeymap por @emmanuelmmontesinos en github")
-    while check:
+    bind = MIDIbind()
+    bind.load_bind()
         
+    while check:
+        print("Bienvenido a MIDIKeymap por @emmanuelmmontesinos en github")
         get_all_midis()
         print("1 - Asignar tecla/pad/slider a comando")
         print("2 - Activar MIDIKeymap")
@@ -85,7 +75,6 @@ if __name__ == "__main__":
             case "1":
                 clean_window()
                 get_all_midis()
-                bind = MIDIbind()
                 obj = bind.bind()
                 command = input("Ponga el comando separado por ,\nEj para Ctrl + C sería: ctrl,c\n")
                 obj.set_command(command)
@@ -102,6 +91,7 @@ if __name__ == "__main__":
                     print("Desactivando MIDIKeymap")
             case "3":
                 print("Cerrando Programa")
+                bind.save_bind()
                 break
 
         

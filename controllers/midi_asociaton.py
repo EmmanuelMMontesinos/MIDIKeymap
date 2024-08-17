@@ -1,5 +1,6 @@
 import pyautogui
 import pygame.midi
+from controllers.load_config import load,save
 
 STATUS_KEYS = 144
 STATUS_PADS = 153
@@ -7,6 +8,23 @@ STATUS_CC = 176
 
 # Bind keys and connect 
 class MIDIbind:
+    def load_bind(self):
+        save = load()
+        if len(save):
+            for bind in save:
+                bind = bind.split(",")
+                try:
+                    status, note, command = int(bind[0]), int(bind[1]), ",".join(bind[2:])
+                    bind = [status,note,command]
+                except Exception as e:
+                    print(e)
+                    return
+                else:
+                    self.bind(load=bind)
+
+    def save_bind(self):
+        save(MIDIkeys.controlls,MIDIcc.controlls,MIDIPads.controlls)
+
     def connect(self,status:int,note:int,value:int):
         match status:
             # Keys
@@ -39,20 +57,30 @@ class MIDIbind:
                 else:
                     print("Sin asignar")
                     return False
-                    
-    def bind(self):
-        status, note, value = self.get_key()
 
-        if note not in MIDIkeys.controlls.keys() and status == STATUS_KEYS:
+    def bind(self,load=None):
+        command = None
+        select = None
+        if not load:
+            status, note, value = self.get_key()
+        else:
+            status,note,command = load
+            command = command[:-1]
+            value = 50
+        if status == STATUS_KEYS:
             select = MIDIkeys(note,value)
 
-        elif note not in MIDIcc.controlls.keys() and status == STATUS_CC:
+        elif status == STATUS_CC:
             select = MIDIcc(note,value)
 
-        elif note not in MIDIPads.controlls.keys() and status == STATUS_PADS:
+        elif status == STATUS_PADS:
             select = MIDIPads(note,value)
 
         self.connect(status,note,value)
+        if command and select:
+            select.set_command(command)
+            return select
+        
         if select:
             return select
 
@@ -107,8 +135,7 @@ class MIDIkeys(MIDIControllers):
         self.update_keys()
 
     def update_keys(self):
-        if not self.number in MIDIkeys.controlls.keys():
-            MIDIkeys.controlls[self.number] = self
+        MIDIkeys.controlls[self.number] = self
 
 # Only Control Change/ sliders
 class MIDIcc(MIDIControllers):
