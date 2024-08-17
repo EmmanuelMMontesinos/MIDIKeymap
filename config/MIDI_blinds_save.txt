@@ -4,4 +4,4 @@
 144,48,space
 153,36,ctrl,a
 153,37,ctrl,c
-153,38,ctrl
+153,38,ctrl,v

@@ -8,6 +8,7 @@ def load():
         
 def save(keys,cc,pads):
     shortcuts = load()
+    
     with open(Files.MIDI_BLINDS_SAVE.value,"w") as file:
         for key in keys.values():
             status, note, command = key.status, key.number, ",".join(key.command)

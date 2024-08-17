@@ -65,6 +65,7 @@ if __name__ == "__main__":
     bind.load_bind()
         
     while check:
+        clean_window()
         print("Bienvenido a MIDIKeymap por @emmanuelmmontesinos en github")
         get_all_midis()
         print("1 - Asignar tecla/pad/slider a comando")

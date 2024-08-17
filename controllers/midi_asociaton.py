@@ -114,9 +114,8 @@ class MIDIControllers:
         self.value = value
         
     def start_command(self):
-        if self.command:
-            pyautogui.hotkey(self.command)
-            print(" + ".join(self.command))
+        pyautogui.hotkey(self.command)
+        print(" + ".join(self.command))
 
     def set_command(self,command):
         self.command = [coman.lower() for coman in command.split(",")]
