@@ -64,6 +64,63 @@ Actualmente, puedes asignar las siguientes funciones a los sliders (CC) de tu co
 
 > **Nota:** Estas son las únicas funciones disponibles para los sliders en esta versión. Se planean más opciones en futuras actualizaciones.
 
+## API
+
+En esta sección se detallan las teclas especiales que puedes usar para asignar comandos a tu controlador MIDI. Puedes combinarlas según sea necesario.
+
+### Teclas de Control
+
+- `ctrl`: Tecla Control
+- `shift`: Tecla Shift
+- `alt`: Tecla Alt
+- `cmd` o `win`: Tecla Command (en macOS) o Tecla Windows (en Windows)
+
+### Teclas Funcionales
+
+- `f1` a `f24`: Teclas de función F1 a F24
+- `esc`: Tecla Escape
+- `tab`: Tecla Tabulador
+- `capslock`: Tecla Bloq Mayús
+- `enter`: Tecla Enter/Intro
+- `backspace`: Tecla Retroceso
+- `space`: Tecla Espacio
+- `delete`: Tecla Supr
+- `insert`: Tecla Insertar
+- `home`: Tecla Inicio
+- `end`: Tecla Fin
+- `pageup`: Tecla AvPág
+- `pagedown`: Tecla RePág
+
+### Teclas de Navegación
+
+- `up`: Flecha arriba
+- `down`: Flecha abajo
+- `left`: Flecha izquierda
+- `right`: Flecha derecha
+
+### Teclas de Modificación y Bloqueo
+
+- `numlock`: Bloq Num
+- `scrolllock`: Bloq Despl
+- `pause`: Pausa/Inter
+
+### Teclas del Teclado Numérico
+
+- `num0` a `num9`: Números en el teclado numérico
+- `numadd`: Tecla + en el teclado numérico
+- `numsub`: Tecla - en el teclado numérico
+- `nummul`: Tecla * en el teclado numérico
+- `numdiv`: Tecla / en el teclado numérico
+- `numdot`: Punto decimal en el teclado numérico
+- `numenter`: Enter en el teclado numérico
+
+### Teclas Misceláneas
+
+- `printscreen`: Imprimir pantalla
+- `menu`: Tecla Menú de contexto
+
+Estas teclas pueden ser combinadas para crear comandos más complejos, como `ctrl,shift,a` para simular Ctrl+Shift+A.
+
 ## Próximas Funciones
 
 Estamos trabajando en añadir las siguientes funciones a MIDIKeymap:
