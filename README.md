@@ -128,7 +128,7 @@ Estamos trabajando en añadir las siguientes funciones a MIDIKeymap:
 - **Moverse entre escritorios virtuales:** Navega fácilmente entre escritorios virtuales utilizando los controles de tu dispositivo MIDI.
 - **Abrir archivos o programas:** Asigna comandos para abrir archivos o ejecutar programas directamente desde tu controlador MIDI.
 - **GUI para facilitar la configuración:** Interfaz gráfica de usuario que hará más sencilla la configuración y asignación de comandos.
-- **Guardar la configuración y cargarla automáticamente al iniciar:** Almacena tus configuraciones y cárgalas automáticamente cada vez que inicies el programa.
+- **Opción de Dispositivos:** Consulta toda la información de tus dispositivos, incluida una lista de los que estan conectados.
 
 ## Contribuciones
 
