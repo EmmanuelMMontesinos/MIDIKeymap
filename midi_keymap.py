@@ -7,19 +7,21 @@ class MIDIKeymap:
         pygame.midi.init()
         input_id = pygame.midi.get_default_input_id()
         midi_input = pygame.midi.Input(1)
-
-        while check:
-            if midi_input.poll():
-                # Leer los mensajes MIDI
-                midi_events = midi_input.read(10)
-                for event in midi_events:
-                    data = event[0]
-                    status = data[0]
-                    note = data[1]
-                    MIDIbind.connect(MIDIbind,status,note)
-                    
-        midi_input.close()
-        pygame.midi.quit()
+        try:
+            while check:
+                if midi_input.poll():
+                    # Leer los mensajes MIDI
+                    midi_events = midi_input.read(10)
+                    for event in midi_events:
+                        data = event[0]
+                        status = data[0]
+                        note = data[1]
+                        MIDIbind.connect(MIDIbind,status,note)
+        except KeyboardInterrupt:
+            print("Desactivando")
+        finally:
+            midi_input.close()
+            pygame.midi.quit()
 
 def clean_window():
     if os.name == "nt":
