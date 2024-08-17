@@ -1,3 +1,6 @@
+"""CLI - MIDIKeymap
+"""
+
 import pygame.midi
 from controllers.midi_asociaton import *
 import os
@@ -11,12 +14,13 @@ class MIDIKeymap:
             while check:
                 if midi_input.poll():
                     # Leer los mensajes MIDI
-                    midi_events = midi_input.read(10)
+                    midi_events = midi_input.read(1)
                     for event in midi_events:
                         data = event[0]
                         status = data[0]
                         note = data[1]
-                        MIDIbind.connect(MIDIbind,status,note)
+                        value = data[2]
+                        MIDIbind.connect(MIDIbind,status,note,value)
         except KeyboardInterrupt:
             print("Desactivando")
         finally:
@@ -36,24 +40,28 @@ def get_all_midis():
     cc = MIDIcc.controlls
     pads = MIDIPads.controlls
 
-    print("Asignaciones de Teclas:")
-    for note, obj in keys.items():
-        print(f"{note} --> {' + '.join(obj.command).upper()}")
+    if keys:
+        print("Asignaciones de Teclas:")
+        for note, obj in keys.items():
+            print(f"{note} --> {' + '.join(obj.command).upper()}")
 
-    print("Asignaciones de cc:")
-    for note, obj in cc.items():
-        print(f"{note} --> {' + '.join(obj.command).upper()}")
+    if cc:
+        print("Asignaciones de slider:")
+        for note, obj in cc.items():
+            print(f"{note} --> {' + '.join(obj.command).upper()}")
 
-    print("Asignaciones de Pads:")
-    for note, obj in pads.items():
-        print(f"{note} --> {' + '.join(obj.command).upper()}")
+    if pads:
+        print("Asignaciones de Pads:")
+        for note, obj in pads.items():
+            print(f"{note} --> {' + '.join(obj.command).upper()}")
+
     print()
 
-bind_1 = MIDIkeys(72)
-bind_2 = MIDIkeys(71)
-bind_3 = MIDIPads(36)
-bind_4 = MIDIPads(37)
-bind_5 = MIDIPads(38)
+bind_1 = MIDIkeys(72,8)
+bind_2 = MIDIkeys(71,8)
+bind_3 = MIDIPads(36,8)
+bind_4 = MIDIPads(37,8)
+bind_5 = MIDIPads(38,8)
 
 bind_1.set_command("f11")
 bind_2.set_command("esc")

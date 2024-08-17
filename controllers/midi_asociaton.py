@@ -5,10 +5,11 @@ STATUS_KEYS = 144
 STATUS_PADS = 153
 STATUS_CC = 176
 
+# Bind keys and connect 
 class MIDIbind:
-    def connect(self,status:int,note:int):
+    def connect(self,status:int,note:int,value:int):
         match status:
-            # Teclas
+            # Keys
             case 144:
                 print(f"Tecla presionada: {note}")
                 if note in MIDIkeys.controlls.keys():
@@ -33,25 +34,25 @@ class MIDIbind:
                 control = note
                 print(f"Control Change detectado - cc: {control}")
                 if control in MIDIcc.controlls.keys():
-                    MIDIcc.controlls[control].start_command()
+                    MIDIcc.controlls[control].start_command(value)
                     return True
                 else:
                     print("Sin asignar")
                     return False
                     
     def bind(self):
-        status, note = self.get_key()
+        status, note, value = self.get_key()
 
         if note not in MIDIkeys.controlls.keys() and status == STATUS_KEYS:
-            select = MIDIkeys(note)
+            select = MIDIkeys(note,value)
 
         elif note not in MIDIcc.controlls.keys() and status == STATUS_CC:
-            select = MIDIcc(note)
+            select = MIDIcc(note,value)
 
         elif note not in MIDIPads.controlls.keys() and status == STATUS_PADS:
-            select = MIDIPads(note)
+            select = MIDIPads(note,value)
 
-        self.connect(status,note)
+        self.connect(status,note,value)
         if select:
             return select
 
@@ -70,17 +71,19 @@ class MIDIbind:
                     data = event[0]
                     status = data[0]
                     note = data[1]
+                    value = data[2]
                     
                 
                 check = False
         midi_input.close()
         pygame.midi.quit()
-        return status, note
+        return status, note, value
 
-
+# Diferent types of button from the  MIDI Controler standar
 class MIDIControllers:
-    def __init__(self,number:int) -> None:
+    def __init__(self,number:int,value:int) -> None:
         self.number = number
+        self.value = value
         
     def start_command(self):
         if self.command:
@@ -90,12 +93,13 @@ class MIDIControllers:
     def set_command(self,command):
         self.command = [coman.lower() for coman in command.split(",")]
 
+# Only Piano Keys
 class MIDIkeys(MIDIControllers):
 
     controlls = {}
 
-    def __init__(self,number:int) -> None:
-        super().__init__(number)
+    def __init__(self,number:int,value:int) -> None:
+        super().__init__(number,value)
         self.status = 144
 
     def set_command(self, command):
@@ -105,13 +109,14 @@ class MIDIkeys(MIDIControllers):
     def update_keys(self):
         if not self.number in MIDIkeys.controlls.keys():
             MIDIkeys.controlls[self.number] = self
-    
+
+# Only Control Change/ sliders
 class MIDIcc(MIDIControllers):
 
     controlls = {}
 
-    def __init__(self,number:int) -> None:
-        super().__init__(number)
+    def __init__(self,number:int,value:int) -> None:
+        super().__init__(number,value)
         self.status = 176
 
     def set_command(self, command):
@@ -122,13 +127,38 @@ class MIDIcc(MIDIControllers):
         if not self.number in MIDIcc.controlls.keys():
             MIDIcc.controlls[self.number] = self
 
+    def start_command(self,value):
+        if self.command and len(self.command) == 1:
+            command = self.command[0]
+        elif self.command:
+            command = self.command
+        match command:
+            case "scroll":
+                if value > self.value:
+                    pyautogui.scroll(100)
+                    self.value = value
+                elif value < self.value:
+                    pyautogui.scroll(-100)
+                    self.value = value
+            case "volumen":
+                if value > self.value:
+                    pyautogui.press("volumeup")
+                    self.value = value
+                elif value < self.value:
+                    pyautogui.press("volumedown")
+                    self.value = value
 
+            case _:
+                pyautogui.hotkey(self.command)
+                self.value = value
+
+# Only Pads
 class MIDIPads(MIDIControllers):
 
     controlls = {}
 
-    def __init__(self,number:int) -> None:
-        super().__init__(number)
+    def __init__(self,number:int,value:int) -> None:
+        super().__init__(number,value)
         self.status = 153
 
     def set_command(self, command):
