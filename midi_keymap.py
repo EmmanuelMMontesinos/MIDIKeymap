@@ -21,6 +21,7 @@ class MIDIKeymap:
                         note = data[1]
                         value = data[2]
                         MIDIbind.connect(MIDIbind,status,note,value)
+
         except KeyboardInterrupt:
             print("Desactivando")
         finally:
