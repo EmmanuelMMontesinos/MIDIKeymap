@@ -5,3 +5,4 @@
 153,36,ctrl,a
 153,37,ctrl,c
 153,38,ctrl,v
+176,77,volumen

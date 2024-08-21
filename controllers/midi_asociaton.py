@@ -94,7 +94,7 @@ class MIDIbind:
         while check:
             if midi_input.poll():
                 # Leer los mensajes MIDI
-                midi_events = midi_input.read(10)
+                midi_events = midi_input.read(1)
                 for event in midi_events:
                     data = event[0]
                     status = data[0]
@@ -120,6 +120,27 @@ class MIDIControllers:
     def set_command(self,command):
         self.command = [coman.lower() for coman in command.split(",")]
 
+    def all_midis(self):
+        pygame.midi.init()
+        input_id = pygame.midi.get_default_input_id()
+        print(f"ID de entrada MIDI predeterminado: {input_id}")
+        midi_input = pygame.midi.Input(1)
+
+        check = True
+        while check:
+            try:
+                if midi_input.poll():
+                    # Leer los mensajes MIDI
+                    midi_events = midi_input.read(10)
+                    for event in midi_events:
+                        data = event[0]
+                        status = data[0]
+                        note = data[1]
+                        value = data[2]
+                        print(f"Status {status} - Nota {note} - Valor {value}")
+            except KeyboardInterrupt as e:
+                print(f"error: {e}")
+                check = False
 # Only Piano Keys
 class MIDIkeys(MIDIControllers):
 
@@ -161,23 +182,23 @@ class MIDIcc(MIDIControllers):
         match command:
             case "scroll":
                 if value > self.value:
+                    self.value = value
                     pyautogui.scroll(100)
-                    self.value = value
                 elif value < self.value:
-                    pyautogui.scroll(-100)
                     self.value = value
+                    pyautogui.scroll(-100)
             case "volumen":
                 if value > self.value:
+                    self.value = value
                     pyautogui.press("volumeup")
-                    self.value = value
                 elif value < self.value:
-                    pyautogui.press("volumedown")
                     self.value = value
+                    pyautogui.press("volumedown")
 
             case _:
-                pyautogui.hotkey(self.command)
                 self.value = value
-
+                pyautogui.hotkey(self.command)
+        return
 # Only Pads
 class MIDIPads(MIDIControllers):
 

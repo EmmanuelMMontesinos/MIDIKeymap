@@ -4,6 +4,16 @@
 import pygame.midi
 from controllers.midi_asociaton import *
 import os
+import time
+
+last_time_called = 0
+
+def limited_midi_connect(midi_bind, status, note, value):
+    global last_time_called
+    elapsed = time.time() - last_time_called
+    if elapsed >= 0.2: 
+        last_time_called = time.time()
+        midi_bind.connect(midi_bind, status, note, value)
 
 class MIDIKeymap:
     def activate(self):
@@ -14,13 +24,14 @@ class MIDIKeymap:
             while check:
                 if midi_input.poll():
                     # Leer los mensajes MIDI
-                    midi_events = midi_input.read(1)
+                    midi_events = midi_input.read(100)
                     for event in midi_events:
                         data = event[0]
                         status = data[0]
                         note = data[1]
                         value = data[2]
-                        MIDIbind.connect(MIDIbind,status,note,value)
+                        limited_midi_connect(MIDIbind,status,note,value)
+                    midi_events = []
 
         except KeyboardInterrupt:
             print("Desactivando")
@@ -71,7 +82,8 @@ if __name__ == "__main__":
         get_all_midis()
         print("1 - Asignar tecla/pad/slider a comando")
         print("2 - Activar MIDIKeymap")
-        print("3 - Salir")
+        print("3 - Comprobar tecla/pad/slider")
+        print("4 - Salir")
         selection = input("")
         match selection:
             case "1":
@@ -91,7 +103,11 @@ if __name__ == "__main__":
 
                 except KeyboardInterrupt:
                     print("Desactivando MIDIKeymap")
+
             case "3":
+                clean_window()
+                MIDIControllers.all_midis(MIDIControllers)
+            case "4":
                 print("Cerrando Programa")
                 bind.save_bind()
                 break
