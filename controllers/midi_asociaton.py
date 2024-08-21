@@ -93,7 +93,6 @@ class MIDIbind:
         check = True
         while check:
             if midi_input.poll():
-                # Leer los mensajes MIDI
                 midi_events = midi_input.read(1)
                 for event in midi_events:
                     data = event[0]
@@ -130,7 +129,6 @@ class MIDIControllers:
         while check:
             try:
                 if midi_input.poll():
-                    # Leer los mensajes MIDI
                     midi_events = midi_input.read(10)
                     for event in midi_events:
                         data = event[0]
