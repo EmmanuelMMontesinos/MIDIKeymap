@@ -46,6 +46,24 @@ class MIDIbind:
                 else:
                     print("Sin asignar")
                     return False
+            case 185:
+                print(f"Pad: {note}")
+                if note in MIDIPads.controlls.keys():
+                    MIDIPads.controlls[note].start_command()
+                    return True
+                else:
+                    print("Sin asignar")
+                    return False
+                
+            case 201:
+                print(f"Pad: {note}")
+                if note in MIDIPads.controlls.keys():
+                    MIDIPads.controlls[note].start_command()
+                    return True
+                else:
+                    print("Sin asignar")
+                    return False
+
 
             # Sliders
             case 176:

@@ -244,7 +244,7 @@
       </font>
      </property>
      <property name="text">
-      <string>137 - Pad</string>
+      <string>153/185/201 - Pad</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_8">

@@ -144,7 +144,7 @@ class Ui_MainWindow(object):
         self.label_4.setText(QCoreApplication.translate("MainWindow", u"Nombre del Atajo", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Tecla/Combinaci\u00f3n", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"144 - Tecla Piano", None))
-        self.label_7.setText(QCoreApplication.translate("MainWindow", u"137 - Pad", None))
+        self.label_7.setText(QCoreApplication.translate("MainWindow", u"153/185/201 - Pad", None))
         self.label_8.setText(QCoreApplication.translate("MainWindow", u"176 - Slider / Dial", None))
         self.menu_opciones.setTitle(QCoreApplication.translate("MainWindow", u"Opciones", None))
     # retranslateUi
