@@ -6,65 +6,198 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>578</width>
+    <height>556</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MIDIKeymap</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QToolBox" name="toolBox">
+   <widget class="QGroupBox" name="box_pads_2">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>50</y>
-      <width>361</width>
-      <height>114</height>
+      <x>200</x>
+      <y>180</y>
+      <width>181</width>
+      <height>321</height>
      </rect>
     </property>
-    <property name="currentIndex">
-     <number>0</number>
+    <property name="title">
+     <string>Pads</string>
     </property>
-    <widget class="QWidget" name="page">
+   </widget>
+   <widget class="QGroupBox" name="box_cc">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>180</y>
+      <width>181</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>CC</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="box_keys">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>180</y>
+      <width>181</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Keys</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>561</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Agregar Atajo MIDI</string>
+    </property>
+    <widget class="QPushButton" name="boton_detectar">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>361</width>
-       <height>54</height>
+       <x>390</x>
+       <y>40</y>
+       <width>141</width>
+       <height>24</height>
       </rect>
      </property>
-     <attribute name="label">
-      <string>Inicio</string>
-     </attribute>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>75</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Crear Perfil</string>
-      </property>
-     </widget>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>Detectar MIDI</string>
+     </property>
     </widget>
-    <widget class="QWidget" name="page_2">
+    <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>361</width>
-       <height>54</height>
+       <x>200</x>
+       <y>110</y>
+       <width>171</width>
+       <height>24</height>
       </rect>
      </property>
-     <attribute name="label">
-      <string>final</string>
-     </attribute>
+     <property name="text">
+      <string>Guardar</string>
+     </property>
     </widget>
+    <widget class="QLineEdit" name="input_status">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>40</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Status</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="input_key">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>40</y>
+       <width>81</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Key</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="comboBox_tipe">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>40</y>
+       <width>171</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Tipo de MIDI</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="input_nombre">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>80</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Nombre</string>
+     </property>
+    </widget>
+    <widget class="QKeySequenceEdit" name="input_atajo">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>80</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLCDNumber" name="led_cc">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>160</y>
+      <width>64</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:#0af;</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="led_pads">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>160</y>
+      <width>64</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background:yellow;</string>
+    </property>
+   </widget>
+   <widget class="QLCDNumber" name="led_keys">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>160</y>
+      <width>64</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: #0f2;</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -72,7 +205,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>578</width>
      <height>33</height>
     </rect>
    </property>

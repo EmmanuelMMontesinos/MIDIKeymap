@@ -119,13 +119,14 @@ class MIDIControllers:
     def set_command(self,command):
         self.command = [coman.lower() for coman in command.split(",")]
 
-    def all_midis(self):
+    def all_midis(self,ui=False):
         pygame.midi.init()
         input_id = pygame.midi.get_default_input_id()
         print(f"ID de entrada MIDI predeterminado: {input_id}")
         midi_input = pygame.midi.Input(1)
 
         check = True
+        status_, note_ = None, None
         while check:
             try:
                 if midi_input.poll():
@@ -136,9 +137,16 @@ class MIDIControllers:
                         note = data[1]
                         value = data[2]
                         print(f"Status {status} - Nota {note} - Valor {value}")
+                        if ui:
+                            check = False
+                            status_, note_ = status, note
+                            break
             except KeyboardInterrupt as e:
                 print(f"error: {e}")
                 check = False
+        pygame.midi.quit()
+        return str(status_),str(note_)
+
 # Only Piano Keys
 class MIDIkeys(MIDIControllers):
 
