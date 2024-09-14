@@ -186,12 +186,12 @@ class MIDIcc(MIDIControllers):
                     self.value = value
                     pyautogui.scroll(-100)
             case "volumen":
-                if value > self.value:
-                    self.value = value
+                if value > self.value or value == 127:
                     pyautogui.press("volumeup")
-                elif value < self.value:
                     self.value = value
+                elif value < self.value or value == 0:
                     pyautogui.press("volumedown")
+                    self.value = value
 
             case _:
                 self.value = value
