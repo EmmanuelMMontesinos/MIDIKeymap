@@ -14,8 +14,8 @@ class MIDIbind:
             for bind in save:
                 bind = bind.split(",")
                 try:
-                    status, note, command = int(bind[0]), int(bind[1]), ",".join(bind[2:])
-                    bind = [status,note,command]
+                    name,status, note, command = str(bind[0]), int(bind[1]),int(bind[2]), ",".join(bind[3:])
+                    bind = [name,status,note,command]
                 except Exception as e:
                     print(e)
                     return
@@ -61,10 +61,11 @@ class MIDIbind:
     def bind(self,load=None):
         command = None
         select = None
+        name = None
         if not load:
             status, note, value = self.get_key()
         else:
-            status,note,command = load
+            name,status,note,command = load
             command = command[:-1]
             value = 50
         if status == STATUS_KEYS:
@@ -75,7 +76,8 @@ class MIDIbind:
 
         elif status == STATUS_PADS:
             select = MIDIPads(note,value)
-
+        if name:
+            select.name = name
         self.connect(status,note,value)
         if command and select:
             select.set_command(command)

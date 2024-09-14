@@ -1,8 +1,8 @@
-144,72,f11
-144,71,esc
-144,60,ctrl,s
-144,48,space
-153,36,ctrl,a
-153,37,ctrl,c
-153,38,ctrl,v
-176,77,volumen
+ventana completa,144,72,f11
+excape,144,71,esc
+guardar,144,60,ctrl,s
+espacio,144,48,space
+Selc todo,153,36,ctrl,a
+copiar,153,37,ctrl,c
+pegar,153,38,ctrl,v
+volumen general,176,77,volumen
