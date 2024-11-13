@@ -45,8 +45,7 @@ class MainWindow(QMainWindow):
             self.ui.led_keys.display(len(keys))
             for key in keys.values():
                 str_command = ' + '.join(key.command)
-                label = QLabel(f"{key.name.title()}\n🎹 {key.number} - {str_command.title()}")
-                boton = QPushButton(text="🗑️")
+                label = QLabel(f"{key.name.title()} 🎹 {key.number} - {str_command.title()}")
                 group_box = self.ui.box_keys
                 layout = group_box.layout()
 
@@ -55,13 +54,11 @@ class MainWindow(QMainWindow):
                     group_box.setLayout(layout)
 
                 layout.addWidget(label)
-                layout.addWidget(boton)
         if cc:
             self.ui.led_cc.display(len(cc))
             for c in cc.values():
                 str_command = ' + '.join(c.command)
-                label = QLabel(f"{c.name.title()}\n🎚️ {c.number} - {str_command.title()}")
-                boton = QPushButton(text="🗑️")
+                label = QLabel(f"{c.name.title()} 🎚️ {c.number} - {str_command.title()}")
                 group_box = self.ui.box_cc
                 layout = group_box.layout()
 
@@ -69,14 +66,12 @@ class MainWindow(QMainWindow):
                     layout = QVBoxLayout()
                     group_box.setLayout(layout)
                 layout.addWidget(label)
-                layout.addWidget(boton)
 
         if pads:
             self.ui.led_pads.display(len(pads))
             for pad in pads.values():
                 str_command = ' + '.join(pad.command)
-                label = QLabel(f"{pad.name.title()}\n⬛ {pad.number} - {str_command.title()}")
-                boton = QPushButton(text="🗑️")
+                label = QLabel(f"{pad.name.title()}: ⬛ {pad.number} - {str_command.title()}")
                 group_box = self.ui.box_pads_2
                 layout = group_box.layout()
 
@@ -84,7 +79,6 @@ class MainWindow(QMainWindow):
                     layout = QVBoxLayout()
                     group_box.setLayout(layout)
                 layout.addWidget(label)
-                layout.addWidget(boton)
 
         self.update()
     
