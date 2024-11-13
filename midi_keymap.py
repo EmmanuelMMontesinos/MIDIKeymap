@@ -106,7 +106,14 @@ if __name__ == "__main__":
 
             case "3":
                 clean_window()
-                MIDIControllers.all_midis(MIDIControllers)
+                try:
+                    MIDIControllers.all_midis(MIDIControllers)
+                except pygame.midi.MidiException as e:
+                    print(f"No hay un dispositivo MIDI conectado:\n{e}")
+                    input("Presione enter para continuar")
+                except Exception as e:
+                    print(f"Error desconocido: {e}")
+                    input("Presione enter para continuar")
             case "4":
                 print("Cerrando Programa")
                 bind.save_bind()
